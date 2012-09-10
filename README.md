@@ -42,4 +42,11 @@ Gitophp rely on PHP 5.3+ and the Smally framework behind an Apache server with m
 7. [optional] Modify folders  
 You can edit some paths in boot.php if they don't match your needs by default
 > cd Gitophp
-> vim public/boot.php 
+> vim public/boot.php  
+
+Todo
+----
+- Cleaning repo.php template and cutting it in sub part 
+- Add "create repository" and "create branch" logic 
+- Get commits messages and commits age for each item
+- And many more 
