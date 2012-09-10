@@ -24,8 +24,8 @@ Gitophp rely on PHP 5.3+ and the Smally framework behind an Apache server with m
 4. Clone Smally from Github in a library folder  
 <i>By default library folder must be at the same level of Gitophp folder</i>  
 > cd ..  
-> mkdir library 
-> cd library 
+> mkdir library  
+> cd library  
 > git clone git://github.com/lixus3d/Smally.git  
 
 5. You must now have this  
