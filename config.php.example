@@ -1,0 +1,23 @@
+<?php
+
+/* SMALLY CONFIG */
+$config['smally']['paths']['assets'][]		= 'http://assets.gitophp.com/';
+$config['smally']['paths']['assets'][]		= 'http://assets1.gitophp.com/';
+$config['smally']['paths']['assets'][]		= 'http://assets2.gitophp.com/';
+
+
+/* GITOPHP CONFIG */
+$config['git']['paths']['cmd'] 				= 'git.exe'; // path to your git.exe file , I suggest to configure git for 'git.exe' to work from anywhere
+$config['git']['paths']['repositories'] 	= 'c:\\pathtorepositories\\'; // path to your repositories folder
+
+
+if(\Smally\Application::getInstance()->isDev()){
+	/* PLACE YOUR DEVELOPMENT SPECIAL CONFIG HERE */
+	//$config['x']['y'] 				= 'z';
+}
+
+
+if(\Smally\Application::getInstance()->getEnvironnement() == \Smally\Application::ENV_STAGING){
+	/* PLACE YOUR STAGING SPECIAL CONFIG HERE */
+	//$config['x']['y'] 				= 'z';
+}
