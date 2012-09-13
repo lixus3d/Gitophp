@@ -135,6 +135,25 @@ class Repository {
 		return $this->_branches;
 	}
 
+	/**
+	 * Cut a path in sub elements and return them
+	 * @param string $path the path to cut in parts
+	 * @return string
+	 */
+	public function getPathElements($path){
+		$return = array();
+		$return[] = array('name'=>$this->getName(), 'url'=>$this->getUrl());
+
+
+		$paths = explode('/',$path);
+		$sUrl = $this->getActualBranch();
+		foreach($paths as $k => $sPath){
+			if(!$sPath) continue;
+			$sUrl .= '/'.$sPath;
+			$return[] = array('name'=>$sPath,'url'=>$this->getUrl('home').'/tree/'.$sUrl);
+		}
+		return $return;
+	}
 
 
 }

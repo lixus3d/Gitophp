@@ -35,13 +35,13 @@ class Gitophp extends \Smally\Controller {
 			$itemType = $this->getContext()->itemType;
 			$itemPath = $this->getContext()->itemPath;
 
-			if($itemType && $itemPath){
+			if($itemType && $itemPath){ // We have a type and a path
 				$item = new \Git\Item($this->getView()->repo);
 				$item
 					->setType($itemType)
 					->setPath($itemPath)
 					;
-			}else{
+			}else{ // If no path and no item have been defined
 				$item = new \Git\Item($this->getView()->repo);
 				$item
 					->setType(\Git\Item::TYPE_TREE)
@@ -50,6 +50,11 @@ class Gitophp extends \Smally\Controller {
 			}
 			$this->getView()->item = $item;
 
+			// Get sub items if item is a tree
+			if($item->getType() == \Git\Item::TYPE_TREE) $this->getView()->subItems = $item->getContent();
+
+			// Generate paths elements
+			$this->getView()->pathElements = $repo->getPathElements($item->getPath());
 
 		}catch( \Git\Exception $e ){
 			$this->getRooter()->redirect('');

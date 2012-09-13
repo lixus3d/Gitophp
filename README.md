@@ -7,7 +7,7 @@ Yet another private github like interface in php.
 Install
 -------
 
-Gitophp rely on PHP 5.3+ and the Smally framework behind an Apache server with mod_rewrite.  
+Gitophp rely on PHP 5.3+ (with short_tag) and the Smally framework behind an Apache server with mod_rewrite.  
 <i>Actually other httpd service must be compatible but not tested.</i> 
 
 1. Clone Gitophp from Github in your Apache folder
