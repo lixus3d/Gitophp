@@ -17,7 +17,7 @@
 			?>
 		</div>
 		<ul class="grid2">
-			<li class="button"><a href="<?=$this->getBaseUrl('Gitophp/new-branch')?>"><span><span class="desktop">Create</span> new branch</span></a></li>
+			<li class="button"><a href="<?=$this->repo->getUrl('home').'/action/new-branch'?>"><span><span class="desktop">Create</span> new branch</span></a></li>
 		</ul>
 	</div>
 </div>
