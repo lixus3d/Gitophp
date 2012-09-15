@@ -155,5 +155,37 @@ class Repository {
 		return $return;
 	}
 
+	/**
+	 * BRANCH MANIPULATIONS
+	 */
+
+	/**
+	 * Validate a branchName by returning a valid version
+	 * @param  string $branchName The branch name wanted
+	 * @return string
+	 */
+	public function validBranchName($branchName){
+		if($branchName){
+			$branchName = preg_replace('#[^-a-zA-Z0-9]#', '', $branchName);
+			$branchName = trim($branchName,' -');
+			return $branchName;
+		}
+		return false;
+	}
+
+	/**
+	 * Create a new branch in the repository
+	 * @return \Git\Repository
+	 */
+	public function createBranch($branchName){
+		$exec = Exec::getInstance();
+		$cmd = '--git-dir="'.$this->getPath().'" branch "'.$branchName.'"';
+		if($return = $exec->run($cmd)){
+			print_r($cmd);
+			print_r($return);
+			return false;
+		}
+		return true;
+	}
 
 }
