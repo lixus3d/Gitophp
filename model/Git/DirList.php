@@ -51,4 +51,31 @@ class DirList {
 		return $list;
 	}
 
+	/**
+	 * Check if a particular reponame exists
+	 * @param  string $repoName the reponame to test without the ".git"
+	 * @return boolean
+	 */
+	public function exists($repoName){
+		return is_dir($this->getPAth($repoName.'.git'));
+	}
+
+	/**
+	 * Create a new repository with name $repoName
+	 * @param  string $repoName The name of the new repository
+	 * @return boolean Does it work or not ?
+	 */
+	public function createRepository($repoName){
+
+		if(mkdir($this->getPath().$repoName.'.git')){
+			$exec = Exec::getInstance();
+			$cmd = '--git-dir="'.$this->getPath().$repoName.'.git" --bare init';
+			$return = $exec->run($cmd);
+			foreach($return as $line){
+				if(strpos($line,'Initialized') === 0) return true;
+			}
+		}
+		return false;
+	}
+
 }
