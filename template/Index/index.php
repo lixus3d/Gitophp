@@ -2,7 +2,7 @@
 		<h1 class="container8">Repositories List</h1>
 		<div class="actions grid4">
 			<ul>
-				<li class="button"><a href="<?=$this->getBaseUrl('Gitophp/new-repository')?>">Create new repository</a></li>
+				<li class="button"><a href="<?=$this->getBaseUrl('action/new-repository')?>">Create new repository</a></li>
 			</ul>
 		</div>
 	</div>
