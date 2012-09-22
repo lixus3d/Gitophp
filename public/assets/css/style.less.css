@@ -81,7 +81,7 @@ body {
   background-color: #FFF;
 }
 a {
-  color: #ff7200;
+  color: #005566;
   text-decoration: none;
 }
 a:hover {
@@ -165,12 +165,12 @@ h4 {
   color: #FFF;
   display: block;
   padding: 5px 10px 6px;
-  background: -moz-linear-gradient(top,#e66700 0%,#b35000 100%);
-  background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#e66700),color-stop(100%,#b35000));
-  background: -webkit-linear-gradient(top,#e66700 0%,#b35000 100%);
-  background: -o-linear-gradient(top,#e66700 0%,#b35000 100%);
-  background: -ms-linear-gradient(top,#e66700 0%,#b35000 100%);
-  background: linear-gradient(to bottom,#e66700 0%,#b35000 100%);
+  background: -moz-linear-gradient(top,#00404d 0%,#00151a 100%);
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#00404d),color-stop(100%,#00151a));
+  background: -webkit-linear-gradient(top,#00404d 0%,#00151a 100%);
+  background: -o-linear-gradient(top,#00404d 0%,#00151a 100%);
+  background: -ms-linear-gradient(top,#00404d 0%,#00151a 100%);
+  background: linear-gradient(to bottom,#00404d 0%,#00151a 100%);
   background-color: #FFF;
   border: 1px solid #DDD;
   border-color: rgba(0,0,0,0.15) rgba(0,0,0,0.15) rgba(0,0,0,0.25);
@@ -178,12 +178,12 @@ h4 {
   text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
 }
 .button a:hover {
-  background: -moz-linear-gradient(top,#994400 0%,#cc5b00 100%);
-  background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#994400),color-stop(100%,#cc5b00));
-  background: -webkit-linear-gradient(top,#994400 0%,#cc5b00 100%);
-  background: -o-linear-gradient(top,#994400 0%,#cc5b00 100%);
-  background: -ms-linear-gradient(top,#994400 0%,#cc5b00 100%);
-  background: linear-gradient(to bottom,#994400 0%,#cc5b00 100%);
+  background: -moz-linear-gradient(top,#000000 0%,#002b33 100%);
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#000000),color-stop(100%,#002b33));
+  background: -webkit-linear-gradient(top,#000000 0%,#002b33 100%);
+  background: -o-linear-gradient(top,#000000 0%,#002b33 100%);
+  background: -ms-linear-gradient(top,#000000 0%,#002b33 100%);
+  background: linear-gradient(to bottom,#000000 0%,#002b33 100%);
 }
 .icon {
   display: inline-block;
