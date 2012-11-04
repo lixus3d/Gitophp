@@ -9,6 +9,7 @@ class UrlRewriting extends \Smally\AbstractUrlRewriting {
 
 		// For the repo action
 		$this->addRule('#(.*\.git)/action/new-branch$#', array('path'=>'Gitophp/newBranch','matches'=>array('match','repo')));
+		$this->addRule('#(.*\.git)/action/edit$#', array('path'=>'Gitophp/editRepository','matches'=>array('match','repo')));
 
 		// Match sub element of a repo
 		$this->addRule('#(.*\.git)/(tree|blob)/([^/]+)(/(.*))?#', array('path'=>'Gitophp/repo','matches'=>array('match','repo','itemType','branch','path','itemPath')));

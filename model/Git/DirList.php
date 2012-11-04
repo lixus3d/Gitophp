@@ -72,7 +72,11 @@ class DirList {
 			$cmd = '--git-dir="'.$this->getPath().$repoName.'.git" --bare init';
 			$return = $exec->run($cmd);
 			foreach($return as $line){
-				if(strpos($line,'Initialized') === 0) return true;
+				if(strpos($line,'Initialized') === 0){
+					// We must configure the repository to accept http updates
+					file_put_contents($this->getPath().$repoName.'.git\config',"[http]\n\treceivepack = true",FILE_APPEND);
+					return true;
+				}
 			}
 		}
 		return false;

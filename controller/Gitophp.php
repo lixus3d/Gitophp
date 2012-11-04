@@ -4,6 +4,8 @@ namespace Controller;
 
 class Gitophp extends \Smally\Controller {
 
+	protected $_formPrefix = 'repository';
+
 	public function __construct(\Smally\Application $application){
 		parent::__construct($application);
 
@@ -71,17 +73,26 @@ class Gitophp extends \Smally\Controller {
 	public function newRepositoryAction(){
 
 			$repositoryForm = new \Form\RepositoryForm();
-			$repositoryForm->autoPopulateValue($this->getContext());
+			$repositoryForm->setNamePrefix($this->_formPrefix);
 
 			$errors = array();
 
-			if($this->getContext()->submitter){
-				if($this->getContext()->repoName){
-					$repoName = $this->getContext()->repoName;
+			if($inputs = $this->getContext()->{$this->_formPrefix}->toArray()){
+				$repositoryForm->autoPopulateValue($this->getContext());
+				if(isset($inputs['repoName'])&&$inputs['repoName']){
+					$repoName = $inputs['repoName'];
 					$repoName = trim($repoName);
+					$repoDesc = $inputs['repoDesc'];
+					$repoDesc = trim($repoDesc);
 					if(!$this->gitList->exists($repoName)){
 						if($this->gitList->createRepository($repoName)){
-							$this->getRooter()->redirect($repoName.'.git');
+
+							$repo = new \Git\Repository(GIT_PATH_REPOSITORIES.$repoName.'.git');
+
+							if($repoDesc!='') $repo->setDescription($repoDesc);
+
+							$this->getRooter()->redirect($repo->getUrl());
+
 						}else $errors['repoName'] = 'Fail to create the repository "'.$repoName.'" !';
 					}else $errors['repoName'] = 'Repository already exists';
 				}else $errors['repoName'] = 'You must type a repository name.';
@@ -104,15 +115,16 @@ class Gitophp extends \Smally\Controller {
 			$repo = new \Git\Repository(GIT_PATH_REPOSITORIES.$repoBasePath);
 
 			$branchForm = new \Form\BranchForm();
-			$branchForm->autoPopulateValue($this->getContext());
+			$branchForm->setNamePrefix($this->_formPrefix);
 
 			$errors = array();
 
-			if($this->getContext()->submitter){
-				if($this->getContext()->branchName){
-					$branchName = $this->getContext()->branchName;
+			if($inputs = $this->getContext()->{$this->_formPrefix}->toArray()){
+				$branchForm->autoPopulateValue($this->getContext());
+				if(isset($inputs['branchName'])&&$inputs['branchName']){
+					$branchName = $inputs['branchName'];
 					$branchName = $repo->validBranchName($branchName);
-					if($branchName == $this->getContext()->branchName){
+					if($branchName == $inputs['branchName']){
 						if(!in_array($branchName,$repo->getBranches())){
 							if($repo->createBranch($branchName)){
 								$this->getRooter()->redirect($repo->getUrl('home').'/tree/'.$branchName);
@@ -129,6 +141,45 @@ class Gitophp extends \Smally\Controller {
 
 			$this->getView()->repo = $repo;
 			$this->getView()->branchForm = $branchForm;
+
+		}catch( \Git\Exception $e ){
+			$this->getRooter()->redirect('');
+		}
+	}
+
+	public function editRepositoryAction(){
+		$repoBasePath = $this->getContext()->repo;
+
+		try{
+			if(!$repoBasePath) throw new Exception('Invalid repository name');
+			$repo = new \Git\Repository(GIT_PATH_REPOSITORIES.$repoBasePath);
+
+			$repositoryForm = new \Form\RepositoryFormEdit();
+			$repositoryForm->setNamePrefix($this->_formPrefix);
+
+			if($this->getContext()->{$this->_formPrefix}->toArray()){
+				$repositoryForm->autoPopulateValue($this->getContext());
+			}else{
+				$repositoryForm->populateValue(array('repoDesc'=>$repo->getDescription()));
+			}
+
+			$errors = array();
+
+			if($inputs = $this->getContext()->{$this->_formPrefix}->toArray()){
+				if(isset($inputs['repoDesc'])&&$inputs['repoDesc']){
+					$repoDesc = $inputs['repoDesc'];
+					$repoDesc = trim($repoDesc);
+					if($repo->setDescription($repoDesc,true)){
+						$this->getRooter()->redirect($repo->getUrl());
+					}else $errors['repoDesc'] = 'Fail to write the description to the repository "'.$repoName.'" !';
+				}else $errors['repoDesc'] = 'You must define a description';
+			}
+
+			$repositoryForm->populateError($errors);
+
+			$this->getView()->repo = $repo;
+			$this->getView()->repositoryForm = $repositoryForm;
+
 		}catch( \Git\Exception $e ){
 			$this->getRooter()->redirect('');
 		}

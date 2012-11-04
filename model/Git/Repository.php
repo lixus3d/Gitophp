@@ -58,6 +58,13 @@ class Repository {
 		return $this;
 	}
 
+	public function setDescription($description,$breakChain=false){
+		$descPath = $this->getDescriptionPath();
+		$return = file_put_contents($descPath, $description);
+		if($breakChain) return $return;
+		return $this;
+	}
+
 	/**
 	 * Get the repository path
 	 * @return string
@@ -80,12 +87,16 @@ class Repository {
 	 */
 	public function getDescription(){
 		if(is_null($this->_description)){
-			$descPath = $this->getPath().DIRECTORY_SEPARATOR.'description';
+			$descPath = $this->getDescriptionPath();
 			if(file_exists($descPath)){
 				$this->_description = file_get_contents($descPath);
 			}else $this->_description = '';
 		}
 		return $this->_description;
+	}
+
+	public function getDescriptionPath(){
+		return $this->getPath().DIRECTORY_SEPARATOR.'description';
 	}
 
 	/**

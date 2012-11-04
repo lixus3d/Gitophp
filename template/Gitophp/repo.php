@@ -18,6 +18,7 @@
 		</div>
 		<ul class="grid2">
 			<li class="button"><a href="<?=$this->repo->getUrl('home').'/action/new-branch'?>"><span><span class="desktop">Create</span> new branch</span></a></li>
+			<li class="button"><a href="<?=$this->repo->getUrl('home').'/action/edit'?>">Edit</a></li>
 		</ul>
 	</div>
 </div>
@@ -51,7 +52,7 @@
 	<?	if( isset($this->subItems) ) {
 			echo $this->render('Gitophp/itemList');
 		} else { ?>
-			<pre><code><?=$this->item->getContent()?></code></pre>
+			<pre><code><?=_h($this->item->getContent())?></code></pre>
 	<? 	}	?>
 	</div>
 

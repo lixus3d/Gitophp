@@ -166,7 +166,7 @@ class Item {
 
 					foreach($return as $line){
 						if($itemObject = Item::make($line,$this->getRepository())){
-							$itemObject->setPath(($this->getPath()?$this->getPath().'/':'').$itemObject->getName());
+							$itemObject->setPath(($this->getPath()!=''?$this->getPath().'/':'').$itemObject->getName());
 							switch($itemObject->getType()){
 								case \Git\Item::TYPE_BLOB:
 									$blobs[$itemObject->getName()] = $itemObject;
