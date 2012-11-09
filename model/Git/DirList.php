@@ -68,8 +68,6 @@ class DirList {
 	public function createRepository($repoName){
 
 		if(mkdir($this->getPath().$repoName.'.git')){
-			chgrp($this->getPath().$repoName.'.git','www-data');
-			chmod($this->getPath().$repoName.'.git',0770);
 			$exec = Exec::getInstance();
 			$cmd = '--git-dir="'.$this->getPath().$repoName.'.git" --bare init';
 			$return = $exec->run($cmd);
@@ -77,6 +75,11 @@ class DirList {
 				if(strpos($line,'Initialized') === 0){
 					// We must configure the repository to accept http updates
 					file_put_contents($this->getPath().$repoName.'.git'.DIRECTORY_SEPARATOR.'config',"[http]\n\treceivepack = true",FILE_APPEND);
+					if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+						exec('chgrp -R www-data '.$this->getPath().$repoName.'.git');
+						exec('/usr/bin/find '.$this->getPath().$repoName.'.git'.' -type d -exec chmod g+rwx {} \;');
+						exec('/usr/bin/find '.$this->getPath().$repoName.'.git'.' -type f -exec chmod g+rw {} \;');
+					}
 					return true;
 				}
 			}
