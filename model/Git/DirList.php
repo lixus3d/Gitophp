@@ -68,6 +68,8 @@ class DirList {
 	public function createRepository($repoName){
 
 		if(mkdir($this->getPath().$repoName.'.git')){
+			chgrp($this->getPath().$repoName.'.git','www-data');
+			chmod($this->getPath().$repoName.'.git',0770);
 			$exec = Exec::getInstance();
 			$cmd = '--git-dir="'.$this->getPath().$repoName.'.git" --bare init';
 			$return = $exec->run($cmd);
