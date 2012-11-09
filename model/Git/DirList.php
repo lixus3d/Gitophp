@@ -74,7 +74,7 @@ class DirList {
 			foreach($return as $line){
 				if(strpos($line,'Initialized') === 0){
 					// We must configure the repository to accept http updates
-					file_put_contents($this->getPath().$repoName.'.git\config',"[http]\n\treceivepack = true",FILE_APPEND);
+					file_put_contents($this->getPath().$repoName.'.git'.DIRECTORY_SEPARATOR.'config',"[http]\n\treceivepack = true",FILE_APPEND);
 					return true;
 				}
 			}
