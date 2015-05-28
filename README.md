@@ -7,7 +7,7 @@ Yet another private github like interface in php.
 Install
 -------
 
-Gitophp rely on PHP 5.3+ (with short_tag) and the Smally framework behind an Apache server with mod_rewrite.  
+Gitophp rely on PHP 5.3+ (with short_tag) and the Smally (v1) framework behind an Apache server with mod_rewrite.  
 <i>Actually other httpd service must be compatible but not tested.</i> 
 
 1. Clone Gitophp from Github in your Apache folder
@@ -47,6 +47,5 @@ You can edit some paths in boot.php if they don't match your needs by default
 Todo
 ----
 - Cleaning repo.php template and cutting it in sub part 
-- Add "create repository" and "create branch" logic 
 - Get commits messages and commits age for each item
 - And many more 
